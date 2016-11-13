@@ -1,0 +1,25 @@
+{
+  "name": "regen",
+  "version": "0.0.1",
+  "description": "An opinionated React CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleholzinger/regen.git"
+  },
+  "keywords": [
+    "reactjs",
+    "js",
+    "redux",
+    "webpack"
+  ],
+  "author": "Kyle Holzinger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyleholzinger/regen/issues"
+  },
+  "homepage": "https://github.com/kyleholzinger/regen#readme"
+}
