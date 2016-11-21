@@ -1,5 +1,5 @@
 {
-  "name": "regen",
+  "name": "regen-cli",
   "version": "0.0.1",
   "description": "An opinionated React CLI",
   "main": "index.js",
@@ -24,5 +24,11 @@
   "bugs": {
     "url": "https://github.com/kyleholzinger/regen/issues"
   },
-  "homepage": "https://github.com/kyleholzinger/regen#readme"
+  "homepage": "https://github.com/kyleholzinger/regen#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-jslint": "^1.0.5",
+    "through2": "^2.0.1"
+  }
 }
