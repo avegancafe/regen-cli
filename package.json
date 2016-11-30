@@ -30,5 +30,8 @@
     "gulp-eslint": "^3.0.1",
     "gulp-jslint": "^1.0.5",
     "through2": "^2.0.1"
+  },
+  "dependencies": {
+    "ncp": "^2.0.0"
   }
 }

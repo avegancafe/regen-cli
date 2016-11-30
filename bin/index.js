@@ -2,8 +2,14 @@
 
 let fs = require("fs");
 let path = require("path");
+let ncp = require("ncp");
 
-let allArgs = process.argv.slice(1);
+const ALL_ARGS = process.argv.slice(1);
+const TEMPLATE_DIR = path.join(
+  __dirname,
+  "..",
+  "templates"
+);
 
 /**
  * generateComponent
@@ -32,14 +38,16 @@ function generateProject(name) {
   }
 
   fs.readFile(path.join(
-    __dirname,
-    "..",
-    "templates",
+    TEMPLATE_DIR,
     "project",
     "package.json"
-  ), function (err, data) {
-    fs.writeFileSync("./" + name + "/package.json", data.toString().replace("{project_name}", name));
-  });
+  ), (err, data) => ncp(path.join(
+    TEMPLATE_DIR,
+    "project"
+  ), "./" + name, () => fs.writeFileSync(
+    "./" + name + "/package.json",
+    data.toString().replace("{{project_name}}", name)
+  )));
 }
 
 /**
@@ -61,4 +69,4 @@ function parser(args) {
   }
 }
 
-parser(allArgs);
+parser(ALL_ARGS);
