@@ -18,8 +18,30 @@ const TEMPLATE_DIR = path.join(
  * @returns {undefined}
  */
 function generateComponent(name) {
+  try {
+    fs.statSync("./src/client/app/javascripts/components/");
+  } catch (e) {
+    console.log("The path ./src/client/app/javascripts/components/ does not exist.");
+    return;
+  }
+
+  try {
+    fs.statSync(`./src/client/app/component/${name}`);
+    console.log(`The file ./src/client/app/component/${name} already exists.`);
+    return;
+  } catch (e) {
+
+  }
+
   console.log("generating component " + name);
-  console.log(arguments);
+
+  fs.readFile(path.join(
+    TEMPLATE_DIR,
+    "component.js"
+  ), (err, data) => fs.writeFileSync(
+    `./src/client/app/javascripts/components/${name}.js`,
+    data.toString().replace(/{{class_name}}/g, name)
+  ));
 }
 
 /**
@@ -30,12 +52,14 @@ function generateComponent(name) {
  */
 function generateProject(name) {
   try {
-    fs.statSync("./" + name);
-    console.log(name + " already exists or is not empty");
+    fs.statSync(`./${name}`);
+    console.log(`${name} already exists or is not empty`);
     return;
   } catch (e) {
     fs.mkdirSync(name);
   }
+
+  console.log(`Generating project ${name}`);
 
   fs.readFile(path.join(
     TEMPLATE_DIR,
@@ -44,8 +68,8 @@ function generateProject(name) {
   ), (err, data) => ncp(path.join(
     TEMPLATE_DIR,
     "project"
-  ), "./" + name, () => fs.writeFileSync(
-    "./" + name + "/package.json",
+  ), `./${name}`, () => fs.writeFileSync(
+    `./${name}/package.json`,
     data.toString().replace("{{project_name}}", name)
   )));
 }
