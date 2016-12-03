@@ -3,6 +3,7 @@
 let fs = require("fs");
 let path = require("path");
 let ncp = require("ncp");
+let mkdirp = require("mkdirp");
 
 const ALL_ARGS = process.argv.slice(1);
 const TEMPLATE_DIR = path.join(
@@ -29,8 +30,14 @@ function generateComponent(name) {
     fs.statSync(`./src/client/app/component/${name}`);
     console.log(`The file ./src/client/app/component/${name} already exists.`);
     return;
-  } catch (e) {
+  } catch (e) {}
 
+  try {
+    fs.statSync(`./src/client/app/javascripts/components/${/(.*)\/?.*$/.exec(name)[1]}`);
+  } catch (e) {
+    if (/\//.test(name)) {
+      mkdirp(`./src/client/app/javascripts/components/${/(.*)\/.*$/.exec(name)[1]}`);
+    }
   }
 
   console.log("generating component " + name);
@@ -40,7 +47,7 @@ function generateComponent(name) {
     "component.js"
   ), (err, data) => fs.writeFileSync(
     `./src/client/app/javascripts/components/${name}.js`,
-    data.toString().replace(/{{class_name}}/g, name)
+    data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
   ));
 }
 
