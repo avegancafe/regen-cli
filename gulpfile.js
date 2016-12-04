@@ -1,9 +1,9 @@
-let gulp = require("gulp");
-let eslint = require("gulp-eslint");
-let through2 = require('through2');
-let execSync = require('child_process').execSync;
+var gulp = require("gulp");
+var eslint = require("gulp-eslint");
+var through2 = require('through2');
+var execSync = require('child_process').execSync;
 
-gulp.task('install', function() {
+gulp.task('lint', function() {
   return gulp
     .src("bin/index.js")
     .pipe(eslint())
@@ -15,6 +15,6 @@ gulp.task('install', function() {
     }));
 })
 
-gulp.task('default', ['install'], function() {
-  gulp.watch('bin/index.js', [ 'install' ])
+gulp.task('default', ['lint'], function() {
+  gulp.watch('bin/index.js', [ 'lint' ])
 })

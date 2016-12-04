@@ -1,5 +1,5 @@
-import Test from "@components/test"
+import HelloWorld from "@components/HelloWorld"
 import React from "react"
 import ReactDOM from "react-dom"
 
-ReactDOM.render(<Test />, document.querySelector("#app") )
+ReactDOM.render(<HelloWorld />, document.querySelector("#app") )

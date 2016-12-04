@@ -8,7 +8,7 @@ class {{class_name}} extends React.Component {
 
   render() {
     return (
-      <div>Hello, World!</div>
+      <div>Hello, world!</div>
     )
   }
 }

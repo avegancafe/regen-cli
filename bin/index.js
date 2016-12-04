@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 
-let fs = require("fs");
-let path = require("path");
-let ncp = require("ncp");
-let mkdirp = require("mkdirp");
+var fs = require("fs");
+var path = require("path");
+var ncp = require("ncp");
+var mkdirp = require("mkdirp");
 
-const ALL_ARGS = process.argv.slice(1);
-const TEMPLATE_DIR = path.join(
+var ALL_ARGS = process.argv.slice(1);
+var TEMPLATE_DIR = path.join(
   __dirname,
   "..",
   "templates"
@@ -40,15 +40,17 @@ function generateComponent(name) {
     }
   }
 
-  console.log("generating component " + name);
+  console.log(`Generating component ${name}`);
 
   fs.readFile(path.join(
     TEMPLATE_DIR,
     "component.js"
-  ), (err, data) => fs.writeFileSync(
-    `./src/client/app/javascripts/components/${name}.js`,
-    data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
-  ));
+  ), function (err, data) {
+    fs.writeFileSync(
+      `./src/client/app/javascripts/components/${name}.js`,
+      data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
+    );
+  });
 }
 
 /**
@@ -72,13 +74,17 @@ function generateProject(name) {
     TEMPLATE_DIR,
     "project",
     "package.json"
-  ), (err, data) => ncp(path.join(
-    TEMPLATE_DIR,
-    "project"
-  ), `./${name}`, () => fs.writeFileSync(
-    `./${name}/package.json`,
-    data.toString().replace("{{project_name}}", name)
-  )));
+  ), function (err, data) {
+    ncp(path.join(
+      TEMPLATE_DIR,
+      "project"
+    ), `./${name}`, function () {
+      fs.writeFileSync(
+        `./${name}/package.json`,
+        data.toString().replace("{{project_name}}", name)
+      );
+    });
+  });
 }
 
 /**

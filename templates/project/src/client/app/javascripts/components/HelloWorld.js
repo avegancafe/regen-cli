@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Test extends React.Component {
+class HelloWorld extends React.Component {
   constructor() {
     super()
   }
@@ -10,4 +10,4 @@ class Test extends React.Component {
   }
 }
 
-export default Test
+export default HelloWorld
