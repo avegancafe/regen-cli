@@ -2,7 +2,6 @@
   "name": "regen-cli",
   "version": "0.0.4",
   "description": "An opinionated React CLI",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
