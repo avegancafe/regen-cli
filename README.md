@@ -9,8 +9,6 @@ npm install --global regen-cli
 
 ##Usage
 
-**Note: regen requires Node 5+. There are some ES2015 specific features/syntax.**
-
 There are two commands:
 
 ```bash
