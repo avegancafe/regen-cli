@@ -1,4 +1,4 @@
-# regen
+# regen-cli
 An opinionated React CLI
 
 ##Installation
