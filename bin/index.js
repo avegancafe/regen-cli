@@ -19,24 +19,30 @@ var TEMPLATE_DIR = path.join(
  * @returns {undefined}
  */
 function generateComponent(name) {
+  var BASE_PATH = "./";
   try {
-    fs.statSync("./src/client/app/javascripts/components/");
+    fs.statSync("./package.json");
+    BASE_PATH += "src/client/app/javascripts/components/";
+  } catch (e) {}
+
+  try {
+    fs.statSync(BASE_PATH);
   } catch (e) {
-    console.log("The path ./src/client/app/javascripts/components/ does not exist.");
+    console.log(`The path ${BASE_PATH} does not exist.`);
     return;
   }
 
   try {
-    fs.statSync(`./src/client/app/component/${name}`);
+    fs.statSync(`${BASE_PATH}${name}`);
     console.log(`The file ./src/client/app/component/${name} already exists.`);
     return;
   } catch (e) {}
 
   try {
-    fs.statSync(`./src/client/app/javascripts/components/${/(.*)\/?.*$/.exec(name)[1]}`);
+    fs.statSync(`${BASE_PATH}${/(.*)\/?.*$/.exec(name)[1]}`);
   } catch (e) {
     if (/\//.test(name)) {
-      mkdirp(`./src/client/app/javascripts/components/${/(.*)\/.*$/.exec(name)[1]}`);
+      mkdirp(`${BASE_PATH}${/(.*)\/.*$/.exec(name)[1]}`);
     }
   }
 
@@ -47,7 +53,7 @@ function generateComponent(name) {
     "component.js"
   ), function (err, data) {
     fs.writeFileSync(
-      `./src/client/app/javascripts/components/${name}.js`,
+      `${BASE_PATH}${name}.js`,
       data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
     );
   });
