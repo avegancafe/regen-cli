@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var BUILD_DIR = path.resolve(__dirname, "src/client/public");
-var APP_DIR = path.resolve(__dirname, "src/client/app");
+var BUILD_DIR = path.resolve(__dirname, "build");
+var APP_DIR = path.resolve(__dirname, "src");
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -21,12 +21,12 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel', 'react-hot-loader/webpack'],
-      include: path.join(__dirname, 'src', 'client', 'app', 'javascripts')
+      include: path.join(__dirname, 'src', 'javascripts')
     }]
   },
   resolve: {
     alias: {
-      "@components": path.resolve(path.join(__dirname, 'src', 'client', 'app', 'javascripts', 'components'))
+      "@components": path.resolve(path.join(__dirname, 'src', 'javascripts', 'components'))
     }
   }
 };

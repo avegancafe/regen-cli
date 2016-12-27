@@ -22,7 +22,7 @@ function generateComponent(name) {
   var BASE_PATH = "./";
   try {
     fs.statSync("./package.json");
-    BASE_PATH += "src/client/app/javascripts/components/";
+    BASE_PATH += "src/javascripts/components/";
   } catch (e) {}
 
   try {
@@ -34,7 +34,7 @@ function generateComponent(name) {
 
   try {
     fs.statSync(`${BASE_PATH}${name}`);
-    console.log(`The file ./src/client/app/component/${name} already exists.`);
+    console.log(`The file ./src/component/${name} already exists.`);
     return;
   } catch (e) {}
 
