@@ -1,6 +1,6 @@
 {
   "name": "regen-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An opinionated React CLI",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kyleholzinger/regen.git"
+    "url": "git+https://github.com/kyleholzinger/regen-cli.git"
   },
   "keywords": [
     "reactjs",
@@ -21,9 +21,9 @@
   "author": "Kyle Holzinger",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kyleholzinger/regen/issues"
+    "url": "https://github.com/kyleholzinger/regen-cli/issues"
   },
-  "homepage": "https://github.com/kyleholzinger/regen#readme",
+  "homepage": "https://github.com/kyleholzinger/regen-cli#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
