@@ -22,7 +22,9 @@ function generateComponent(name) {
   var BASE_PATH = "./";
   try {
     fs.statSync("./package.json");
-    BASE_PATH += "src/javascripts/components/";
+    if (!name.match(/\//)) {
+      BASE_PATH += "src/javascripts/components/";
+    }
   } catch (e) {}
 
   try {
