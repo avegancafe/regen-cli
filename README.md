@@ -30,5 +30,7 @@ in the current folder.
 ###`regen component <component name>`
 Generate a new React component with the name `<component name>`
 - will put a React component with the name `<component name>`
-in `./src/client/app/javascripts/components/` if in the root directory of your project, otherwise it will put it in the current folder. Regen expects this folder to exist,
-and not have a file with the name `<component name>`.
+in `./src/client/app/javascripts/components/` if in the root directory of your project
+or if there is a `/` in `<component name>`, otherwise it will put it in the current
+folder. Regen expects this folder to exist, and not have a file with the name
+`<component name>`.
