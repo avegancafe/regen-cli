@@ -9,8 +9,12 @@ class {{class_name}} extends React.Component {
   render() {
     return (
       <div>Hello, world!</div>
-    )
+    );
   }
+}
+
+{{class_name}}.propTypes = {
+  // propTypes go here...
 }
 
 export default {{class_name}};
