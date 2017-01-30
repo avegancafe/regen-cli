@@ -1,10 +1,11 @@
 #! /usr/bin/env node
 
-var fs = require("fs")
-var path = require("path")
-var ncp = require("ncp")
-var mkdirp = require("mkdirp")
 var _ = require("lodash")
+var fs = require("fs")
+var mkdirp = require("mkdirp")
+var ncp = require("ncp")
+var parentPackagePath = require("parent-package-json")
+var path = require("path")
 
 var ALL_ARGS = process.argv.slice(1)
 var TEMPLATE_DIR = path.join(
@@ -21,13 +22,18 @@ var TEMPLATE_DIR = path.join(
  * @returns {undefined}
  */
 function generateComponent(name, opts) {
-  var BASE_PATH = "./"
-  try {
-    fs.statSync("./package.json")
-    if (!name.match(/\//)) {
-      BASE_PATH = BASE_PATH + "src/javascripts/components/"
+  var BASE_PATH = parentPackagePath()
+  if (BASE_PATH === false) {
+    console.log("No package.json was found")
+    return
+  } else {
+    try {
+      fs.statSync('./package.json')
+      BASE_PATH = './src/javascripts/components/'
+    } catch (e) {
+      BASE_PATH = BASE_PATH.path.split('package.json')[0] + 'src/javascripts/components/'
     }
-  } catch (e) {}
+  }
 
   try {
     fs.statSync(BASE_PATH)
@@ -110,9 +116,6 @@ function parser(allArgs) {
   var args = allArgs.filter(function (el) {
     return !el.match(/^-/)
   })
-
-  console.log(opts)
-  console.log(args)
 
   switch(args[1]) {
   case "project":
