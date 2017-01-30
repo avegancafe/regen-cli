@@ -34,3 +34,5 @@ in `./src/client/app/javascripts/components/` if in the root directory of your p
 or if there is a `/` in `<component name>`, otherwise it will put it in the current
 folder. Regen expects this folder to exist, and not have a file with the name
 `<component name>`.
+- passing the `-f` flag to `regen component <component name>` will create a stateless
+functional component instead.
