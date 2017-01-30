@@ -5,7 +5,7 @@ var execSync = require('child_process').execSync
 
 function lint() {
   return gulp
-    .src("./bin/index.js")
+    .src("./bin/**/*.js")
     .pipe(eslint())
     .pipe(eslint.format())
 }
