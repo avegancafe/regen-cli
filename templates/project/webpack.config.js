@@ -26,7 +26,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@components": path.resolve(path.join(__dirname, 'src', 'javascripts', 'components'))
+      "@components": path.resolve(path.join(__dirname, 'src', 'javascripts', 'components')),
+      "@reducers": path.resolve(path.join(__dirname, 'src', 'javascripts', 'reducers')),
+      "@actions": path.resolve(path.join(__dirname, 'src', 'javascripts', 'actions')),
     }
   }
 };
