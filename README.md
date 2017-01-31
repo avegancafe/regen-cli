@@ -30,7 +30,7 @@ in the current folder.
 ###`regen component <component name>`
 Generate a new React component with the name `<component name>`
 - Will put a React component with the name `<component name>`
-in `<project root>/src/client/app/javascripts/components/` if it can find a project root.
+in `<project root>/src/javascripts/components/` if it can find a project root.
 If not, it'll say that it cannot find a `package.json`.
 - Passing the `-f` flag to `regen component <component name>` will create a stateless
 functional component instead.
