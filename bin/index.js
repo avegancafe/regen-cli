@@ -13,14 +13,23 @@ var generateComponent = require(__dirname + "/actions/generateComponent")
  * @returns {undefined}
  */
 function parser() {
-  switch(ARGS[1]) {
-  case "project":
+  if (ARGS[1] === undefined) {
+    console.log("Supported commands:\n" +
+      "regen project <project name>\n" +
+      "regen component <component name>"
+    )
+    return
+  }
+
+  var commandP = new RegExp(ARGS[1])
+
+  if (commandP.exec("project")) {
     generateProject()
-    break
-  case "component":
+  } else if (commandP.exec("component")) {
     generateComponent()
-    break
-  default:
+  } else if (commandP.exec("reducer")) {
+
+  } else {
     console.log("Supported commands:\n" +
       "regen project <project name>\n" +
       "regen component <component name>"
