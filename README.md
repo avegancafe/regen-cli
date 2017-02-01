@@ -23,6 +23,7 @@ To set up your project after generating all of the source and config files,
 you will need to go into your new directory and run `yarn install` to install
 all of your node modules. To start development, use `npm start` to spin up a
 webpack dev server.
+
 #### Caveats
 - Expects there to be no folder with name `<project name>`
 in the current folder.
