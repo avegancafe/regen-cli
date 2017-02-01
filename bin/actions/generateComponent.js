@@ -18,23 +18,21 @@ var TEMPLATE_DIR = config.TEMPLATE_DIR
 function generateComponent() {
   var name = ARGS[2]
   var BASE_PATH = parentPackagePath()
-
-  if (BASE_PATH === false) {
-    console.log("No package.json was found")
-    return
-  }
+  var inProject = false;
 
   try {
     fs.statSync("./package.json")
-    BASE_PATH = "./src/javascripts/components/"
+    inProject = true
+    BASE_PATH = './src/javascripts/components/'
   } catch (e) {
-    BASE_PATH = BASE_PATH.path.split("package.json")[0] + "src/javascripts/components/"
+    if (BASE_PATH !== false) {
+      BASE_PATH = BASE_PATH.path.split("package.json")[0] + "src/javascripts/components/"
+      inProject = true
+    }
   }
 
-  try {
-    fs.statSync(BASE_PATH)
-  } catch (e) {
-    console.log(`The path ${BASE_PATH} does not exist.`)
+  if (!inProject) {
+    console.log("No package.json was found and you are not in a project")
     return
   }
 
