@@ -21,7 +21,7 @@ function parser() {
     generateComponent()
     break
   default:
-    console.Log("Supported commands:\n" +
+    console.log("Supported commands:\n" +
       "regen project <project name>\n" +
       "regen component <component name>"
     )
