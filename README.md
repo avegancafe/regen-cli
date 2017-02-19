@@ -35,3 +35,13 @@ in `<project root>/src/javascripts/components/` if it can find a project root.
 If not, it'll say that it cannot find a `package.json`.
 - Passing the `-f` flag to `regen component <component name>` will create a stateless
 functional component instead.
+
+###`regen reducer <reducer name>`
+Generate a new Redux reducer with the name `<reducer name>` and a new set of base
+actions with the name `<reducer name>`.
+- Will put a Redux reducer with the name `<reducer name>` in
+`<project root>/src/javascripts/reducers/` if it can find a project root.
+If not, it'll say that it cannot find a `package.json`.
+- Will put a set of default action constants with the names `CREATE_<reducer name>`
+and `DELETE_<reducer name>` in
+`<project root>/src/javascripts/actions/`.
