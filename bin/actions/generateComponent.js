@@ -35,7 +35,7 @@ function generateComponent() {
   }
 
   if (fs.existsSync(`${BASE_PATH}${name}`)) {
-    console.log(`The file ./src/component/${name} already exists.`);
+    console.log(`The file ./src/javascripts/component/${name} already exists.`);
     return;
   }
 
