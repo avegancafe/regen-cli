@@ -10,7 +10,6 @@ var generateReducer = require(__dirname + "/actions/generateReducer");
 /**
  * parser
  *
- * @param {array} allArgs list of args passed into binary
  * @returns {undefined}
  */
 function parser() {

@@ -17,8 +17,6 @@ function generateProject() {
   if (fs.existsSync(`./${name}`)) {
     console.log(`${name} already exists or is not empty`);
     return;
-  } else {
-    fs.mkdirSync(name);
   }
 
   console.log(`Generating project ${name} 🎉`);
