@@ -35,7 +35,8 @@ function parser() {
     console.log(
       "Supported commands:\n" +
         "regen project <project name>\n" +
-        "regen component <component name>"
+        "regen component <component name>\n" + 
+        "regen reducer <reducer name>\n"
     );
   }
 }
