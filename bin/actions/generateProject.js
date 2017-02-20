@@ -1,7 +1,7 @@
 var fs = require("fs");
 var ncp = require("ncp");
 var path = require("path");
-var execSync = require("child_process").execSync
+var execSync = require("child_process").execSync;
 
 var config = require("../config");
 var TEMPLATE_DIR = config.TEMPLATE_DIR;
@@ -25,7 +25,7 @@ function generateProject() {
   ncp(path.join(TEMPLATE_DIR, "project"), `./${name}`, function() {
     var data = fs.readFileSync(
       path.join(TEMPLATE_DIR, "project", "package.json")
-    )
+    );
 
     fs.writeFile(
       "./" + name + "/package.json",
@@ -38,7 +38,11 @@ function generateProject() {
     ) {
       fs.writeFile("./" + name + "/.gitignore", data.toString());
       fs.unlink("./" + name + "/gitignore");
-      console.log(execSync("bash -c 'hash tree 2> /dev/null && tree ./" + name + "'").toString());
+      console.log(
+        execSync(
+          "bash -c 'hash tree 2> /dev/null && tree ./" + name + "'"
+        ).toString()
+      );
     });
   });
 }
