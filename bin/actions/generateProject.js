@@ -9,7 +9,6 @@ var ARGS = config.ARGS;
 /**
  * generateProject
  *
- * @param {string} name name of the new project to create
  * @returns {undefined}
  */
 function generateProject() {
@@ -22,7 +21,7 @@ function generateProject() {
     fs.mkdirSync(name);
   }
 
-  console.log(`Generating project ${name}`);
+  console.log(`Generating project ${name} 🎉`);
 
   fs.readFile(path.join(TEMPLATE_DIR, "project", "package.json"), function(
     err,

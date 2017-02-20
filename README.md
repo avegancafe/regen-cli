@@ -9,11 +9,12 @@ npm install --global regen-cli
 
 ##Usage
 
-There are two commands:
+There are three commands:
 
 ```bash
 regen project <project name>
 regen component <component name>
+regen reducer <reducer name>
 ```
 
 ###`regen project <project name>`
