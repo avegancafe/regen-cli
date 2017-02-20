@@ -23,15 +23,23 @@ function generateProject() {
 
   console.log(`Generating project ${name} 🎉`);
 
-  fs.readFile(path.join(TEMPLATE_DIR, "project", "package.json"), function(
-    err,
-    data
-  ) {
-    ncp(path.join(TEMPLATE_DIR, "project"), `./${name}`, function() {
-      fs.writeFileSync(
+  ncp(path.join(TEMPLATE_DIR, "project"), `./${name}`, function() {
+    fs.readFile(path.join(TEMPLATE_DIR, "project", "package.json"), function(
+      err,
+      data
+    ) {
+      fs.writeFile(
         `./${name}/package.json`,
         data.toString().replace("{{project_name}}", name)
       );
+    });
+
+    fs.readFile(path.join(TEMPLATE_DIR, "project", "gitignore"), function(
+      err,
+      data
+    ) {
+      fs.writeFile(`./${name}/.gitignore`, data.toString());
+      fs.unlink(`./${name}/gitignore`)
     });
   });
 }
