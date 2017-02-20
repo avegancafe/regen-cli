@@ -34,19 +34,19 @@ function generateComponent() {
     return;
   }
 
-  if (fs.existsSync(`${BASE_PATH}${name}`)) {
-    console.log(`The file ./src/javascripts/component/${name} already exists.`);
+  if (fs.existsSync(BASE_PATH + name)) {
+    console.log("The file ./src/javascripts/component/" + name + " already exists.");
     return;
   }
 
   if (
-    !fs.existsSync(`${BASE_PATH}${/(.*)\/?.*$/.exec(name)[1]}`) &&
+    !fs.existsSync(BASE_PATH + /(.*)\/?.*$/.exec(name)[1]) &&
       /\//.test(name)
   ) {
-    mkdirp(`${BASE_PATH}${/(.*)\/.*$/.exec(name)[1]}`);
+    mkdirp(BASE_PATH + /(.*)\/.*$/.exec(name)[1]);
   }
 
-  console.log(`Generating component ${name}`);
+  console.log("Generating component " + name);
   fs.readFile(
     path.join(
       TEMPLATE_DIR,
@@ -54,7 +54,7 @@ function generateComponent() {
     ),
     function(err, data) {
       fs.writeFileSync(
-        `${BASE_PATH}${name}.js`,
+        BASE_PATH + name + ".js",
         data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
       );
     }

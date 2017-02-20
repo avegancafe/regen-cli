@@ -28,26 +28,26 @@ function generateReducer() {
     return;
   }
 
-  if (fs.existsSync(`${BASE_PATH}actions/${name}`)) {
-    console.log(`The file ./src/javascripts/actions/${name} already exists.`);
+  if (fs.existsSync(BASE_PATH + "actions/" + name)) {
+    console.log("The file ./src/javascripts/actions/" + name + "already exists.");
     return;
   }
 
   if (
-    !fs.existsSync(`${BASE_PATH}${/(.*)\/?.*$/.exec(name)[1]}`) &&
+    !fs.existsSync(BASE_PATH + /(.*)\/?.*$/.exec(name)[1]) &&
       /\//.test(name)
   ) {
-    mkdirp(`${BASE_PATH}${/(.*)\/.*$/.exec(name)[1]}`);
+    mkdirp(BASE_PATH + /(.*)\/.*$/.exec(name)[1]);
   }
 
-  console.log(`Generating reducer and action ${name}`);
+  console.log("Generating reducer and action " + name);
 
   var objName = /([^\/]*)$/.exec(name)[1];
   var camelCaseName = objName[0].toLowerCase() + objName.slice(1);
 
   fs.readFile(path.join(TEMPLATE_DIR, "reducer.js"), function(err, data) {
     fs.writeFileSync(
-      `${BASE_PATH}reducers/${name}.js`,
+      BASE_PATH + "reducers/" + name + ".js",
       data
         .toString()
         .replace(/{{reducer_name}}/g, objName)
@@ -57,7 +57,7 @@ function generateReducer() {
 
   fs.readFile(path.join(TEMPLATE_DIR, "action.js"), function(err, data) {
     fs.writeFileSync(
-      `${BASE_PATH}actions/${name}.js`,
+      BASE_PATH + "actions/" + name + ".js",
       data
         .toString()
         .replace(/{{reducer_name}}/g, objName)
@@ -65,7 +65,7 @@ function generateReducer() {
     );
   });
 
-  fs.readFile(path.join(`${BASE_PATH}reducers/index.js`), function(err, data) {
+  fs.readFile(path.join(BASE_PATH + "reducers/index.js"), function(err, data) {
     var fin = data.toString();
     var x = fin.indexOf("combineReducers\(");
     var i = x + fin.slice(x).indexOf(",\n}");
@@ -76,9 +76,9 @@ function generateReducer() {
     fin.splice(i + 2, 0, spaces + camelCaseName + ",\n");
     fin = fin.join("");
     fs.writeFileSync(
-      `${BASE_PATH}reducers/index.js`,
+      BASE_PATH + "reducers/index.js",
       fin.slice(0, j) +
-        `import ${camelCaseName} from './${name}';\n` +
+        "import " + camelCaseName + " from './" + name + "';\n" +
         fin.slice(j)
     );
   });

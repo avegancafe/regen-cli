@@ -15,14 +15,14 @@ var ARGS = config.ARGS;
 function generateProject() {
   var name = ARGS[2];
 
-  if (fs.existsSync(`./${name}`)) {
-    console.log(`${name} already exists or is not empty`);
+  if (fs.existsSync("./" + name)) {
+    console.log(name + "already exists or is not empty");
     return;
   }
 
   console.log("Generating project " + name + " 🎉");
 
-  ncp(path.join(TEMPLATE_DIR, "project"), `./${name}`, function() {
+  ncp(path.join(TEMPLATE_DIR, "project"), "./" + name, function() {
     var data = fs.readFileSync(
       path.join(TEMPLATE_DIR, "project", "package.json")
     );
