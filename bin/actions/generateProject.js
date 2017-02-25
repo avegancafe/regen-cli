@@ -22,7 +22,7 @@ function generateProject() {
 
   console.log("Generating project " + name + " 🎉");
 
-  ncp(path.join(TEMPLATE_DIR, "project"), "./" + name, function() {
+  ncp(path.join(TEMPLATE_DIR, "project"), "./" + name, function () {
     var data = fs.readFileSync(
       path.join(TEMPLATE_DIR, "project", "package.json")
     );
@@ -32,11 +32,11 @@ function generateProject() {
       data.toString().replace("{{project_name}}", name)
     );
 
-    fs.readFile(path.join(TEMPLATE_DIR, "project", "gitignore"), function(
+    fs.readFile(path.join(TEMPLATE_DIR, "project", "gitignore"), function (
       err,
-      data
+      gitignore
     ) {
-      fs.writeFile("./" + name + "/.gitignore", data.toString());
+      fs.writeFile("./" + name + "/.gitignore", gitignore.toString());
       fs.unlink("./" + name + "/gitignore");
       console.log(
         execSync(

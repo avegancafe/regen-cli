@@ -1,11 +1,9 @@
-var _ = require("lodash");
 var fs = require("fs");
 var mkdirp = require("mkdirp");
 var parentPackagePath = require("parent-package-json");
 var path = require("path");
 
 var config = require("../config");
-var OPTS = config.OPTS;
 var ARGS = config.ARGS;
 var TEMPLATE_DIR = config.TEMPLATE_DIR;
 
@@ -17,7 +15,8 @@ var TEMPLATE_DIR = config.TEMPLATE_DIR;
 function generateReducer() {
   var name = ARGS[2];
   var BASE_PATH = parentPackagePath();
-  var inProject = false;
+  var objName = /([^\/]*)$/.exec(name)[1];
+  var camelCaseName = objName[0].toLowerCase() + objName.slice(1);
 
   if (fs.existsSync("./package.json")) {
     BASE_PATH = "./src/javascripts/";
@@ -42,10 +41,7 @@ function generateReducer() {
 
   console.log("Generating reducer and action " + name);
 
-  var objName = /([^\/]*)$/.exec(name)[1];
-  var camelCaseName = objName[0].toLowerCase() + objName.slice(1);
-
-  fs.readFile(path.join(TEMPLATE_DIR, "reducer.js"), function(err, data) {
+  fs.readFile(path.join(TEMPLATE_DIR, "reducer.js"), function (err, data) {
     fs.writeFileSync(
       BASE_PATH + "reducers/" + name + ".js",
       data
@@ -55,7 +51,7 @@ function generateReducer() {
     );
   });
 
-  fs.readFile(path.join(TEMPLATE_DIR, "action.js"), function(err, data) {
+  fs.readFile(path.join(TEMPLATE_DIR, "action.js"), function (err, data) {
     fs.writeFileSync(
       BASE_PATH + "actions/" + name + ".js",
       data
@@ -65,7 +61,7 @@ function generateReducer() {
     );
   });
 
-  fs.readFile(path.join(BASE_PATH + "reducers/index.js"), function(err, data) {
+  fs.readFile(path.join(BASE_PATH + "reducers/index.js"), function (err, data) {
     var fin = data.toString();
     var x = fin.indexOf("combineReducers\(");
     var i = x + fin.slice(x).indexOf(",\n}");
