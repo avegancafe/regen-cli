@@ -13,6 +13,8 @@ var generateReducer = require(__dirname + "/actions/generateReducer");
  * @returns {undefined}
  */
 function parser() {
+  var commandP;
+
   if (ARGS[1] === undefined) {
     console.log(
       "Supported commands:\n" +
@@ -23,7 +25,7 @@ function parser() {
     return;
   }
 
-  var commandP = new RegExp(ARGS[1]);
+  commandP = new RegExp(ARGS[1]);
 
   if (commandP.exec("project")) {
     generateProject();
@@ -35,7 +37,7 @@ function parser() {
     console.log(
       "Supported commands:\n" +
         "regen project <project name>\n" +
-        "regen component <component name>\n" + 
+        "regen component <component name>\n" +
         "regen reducer <reducer name>\n"
     );
   }
