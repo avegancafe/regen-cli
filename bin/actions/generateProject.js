@@ -38,11 +38,7 @@ function generateProject() {
     ) {
       fs.writeFileSync("./" + name + "/.gitignore", gitignore.toString());
       fs.unlinkSync("./" + name + "/gitignore");
-      console.log(
-        execSync(
-          "bash -c 'hash tree 2> /dev/null && tree ./" + name + "'"
-        ).toString()
-      );
+      console.log(`Project ${name} generated`);
     });
   });
 }
