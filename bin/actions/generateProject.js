@@ -27,7 +27,7 @@ function generateProject() {
       path.join(TEMPLATE_DIR, "project", "package.json")
     );
 
-    fs.writeFile(
+    fs.writeFileSync(
       "./" + name + "/package.json",
       data.toString().replace("{{project_name}}", name)
     );
@@ -36,8 +36,8 @@ function generateProject() {
       err,
       gitignore
     ) {
-      fs.writeFile("./" + name + "/.gitignore", gitignore.toString());
-      fs.unlink("./" + name + "/gitignore");
+      fs.writeFileSync("./" + name + "/.gitignore", gitignore.toString());
+      fs.unlinkSync("./" + name + "/gitignore");
       console.log(
         execSync(
           "bash -c 'hash tree 2> /dev/null && tree ./" + name + "'"
