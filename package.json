@@ -1,6 +1,6 @@
 {
   "name": "regen-cli",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "An opinionated React CLI",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/kyleholzinger/regen-cli#readme",
   "devDependencies": {
+    "ava": "^0.19.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-jslint": "^1.0.5",
