@@ -6,6 +6,7 @@ var ARGS = config.ARGS;
 var generateProject = require(__dirname + "/actions/generateProject");
 var generateComponent = require(__dirname + "/actions/generateComponent");
 var generateReducer = require(__dirname + "/actions/generateReducer");
+var generateConfig = require(__dirname + "/actions/generateConfig");
 
 /**
  * parser
@@ -33,6 +34,8 @@ function parser() {
     generateComponent();
   } else if (commandP.exec("reducer")) {
     generateReducer();
+  } else if (commandP.exec("config")) {
+    generateConfig();
   } else {
     console.log(
       "Supported commands:\n" +

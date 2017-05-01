@@ -52,7 +52,7 @@ function generateComponent() {
       TEMPLATE_DIR,
       _.includes(OPTS, "-f") ? "functionalComponent.js" : "component.js"
     ),
-    function(err, data) {
+    function (err, data) {
       fs.writeFileSync(
         BASE_PATH + name + ".js",
         data.toString().replace(/{{class_name}}/g, /([^\/]*)$/.exec(name)[1])
