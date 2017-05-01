@@ -1,7 +1,6 @@
 var fs = require("fs");
 var ncp = require("ncp");
 var path = require("path");
-var execSync = require("child_process").execSync;
 
 var config = require("../config");
 var TEMPLATE_DIR = config.TEMPLATE_DIR;

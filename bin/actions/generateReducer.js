@@ -7,6 +7,62 @@ var config = require("../config");
 var ARGS = config.ARGS;
 var TEMPLATE_DIR = config.TEMPLATE_DIR;
 
+
+/**
+ * readOpts
+ *
+ * Reads in .regenrc and extracts the reducers and actions path
+ *
+ * @returns {Object} object of type { reducersPath, actionsPath, basePath }
+ */
+function readOpts() {
+  var basePath = parentPackagePath();
+  var opts = {};
+  var reducersPath;
+  var actionsPath;
+  var tmp;
+
+  if (fs.existsSync("./package.json")) {
+    basePath = "./src/javascripts/";
+    reducersPath = basePath + "reducers/";
+    actionsPath = basePath + "actions/";
+    if (fs.existsSync("./.regenrc")) {
+      opts = require("./.regenrc");
+      if (opts.reducersPath) {
+        reducersPath = opts.reducersPath;
+      }
+
+      if (opts.actionsPath) {
+        actionsPath = opts.actionsPath;
+      }
+    }
+  } else if (basePath !== false) {
+    tmp = basePath.path.split("package.json")[0];
+    basePath = tmp + "src/javascripts/";
+    reducersPath = basePath + "reducers/";
+    actionsPath = basePath + "actions/";
+    if (fs.existsSync(tmp + ".regenrc")) {
+      opts = require(tmp + ".regenrc");
+      if (opts.reducersPath) {
+        reducersPath = tmp + opts.reducersPath;
+      }
+
+      if (opts.actionsPath) {
+        actionsPath = tmp + opts.actionsPath;
+      }
+    }
+  } else {
+    console.log("You are not currently in an node project.");
+    return;
+  }
+
+  return {
+    reducersPath: reducersPath,
+    actionsPath: actionsPath,
+    basePath: basePath
+  };
+}
+
 /**
  * generateReducer
  *
@@ -14,36 +70,31 @@ var TEMPLATE_DIR = config.TEMPLATE_DIR;
  */
 function generateReducer() {
   var name = ARGS[2];
-  var BASE_PATH = parentPackagePath();
   var objName = /([^\/]*)$/.exec(name)[1];
   var camelCaseName = objName[0].toLowerCase() + objName.slice(1);
 
-  if (fs.existsSync("./package.json")) {
-    BASE_PATH = "./src/javascripts/";
-  } else if (BASE_PATH !== false) {
-    BASE_PATH = BASE_PATH.path.split("package.json")[0] + "src/javascripts/";
-  } else {
-    console.log("You are not currently in an node project.");
-    return;
-  }
+  var opts = readOpts();
+  var basePath = opts.basePath;
+  var reducersPath = opts.reducersPath;
+  var actionsPath = opts.actionsPath;
 
-  if (fs.existsSync(BASE_PATH + "actions/" + name)) {
-    console.log("The file ./src/javascripts/actions/" + name + "already exists.");
+  if (fs.existsSync(actionsPath + name)) {
+    console.log("The file " + actionsPath+ name + "already exists.");
     return;
   }
 
   if (
-    !fs.existsSync(BASE_PATH + /(.*)\/?.*$/.exec(name)[1]) &&
+    !fs.existsSync(basePath + /(.*)\/?.*$/.exec(name)[1]) &&
       /\//.test(name)
   ) {
-    mkdirp(BASE_PATH + /(.*)\/.*$/.exec(name)[1]);
+    mkdirp(basePath + /(.*)\/.*$/.exec(name)[1]);
   }
 
   console.log("Generating reducer and action " + name);
 
   fs.readFile(path.join(TEMPLATE_DIR, "reducer.js"), function (err, data) {
     fs.writeFileSync(
-      BASE_PATH + "reducers/" + name + ".js",
+      reducersPath + name + ".js",
       data
         .toString()
         .replace(/{{reducer_name}}/g, objName)
@@ -53,7 +104,7 @@ function generateReducer() {
 
   fs.readFile(path.join(TEMPLATE_DIR, "action.js"), function (err, data) {
     fs.writeFileSync(
-      BASE_PATH + "actions/" + name + ".js",
+      actionsPath + name + ".js",
       data
         .toString()
         .replace(/{{reducer_name}}/g, objName)
@@ -61,7 +112,7 @@ function generateReducer() {
     );
   });
 
-  fs.readFile(path.join(BASE_PATH + "reducers/index.js"), function (err, data) {
+  fs.readFile(path.join(reducersPath + "index.js"), function (err, data) {
     var fin = data.toString();
     var x = fin.indexOf("combineReducers\(");
     var i = x + fin.slice(x).indexOf(",\n}");
@@ -72,7 +123,7 @@ function generateReducer() {
     fin.splice(i + 2, 0, spaces + camelCaseName + ",\n");
     fin = fin.join("");
     fs.writeFileSync(
-      BASE_PATH + "reducers/index.js",
+      reducersPath + "index.js",
       fin.slice(0, j) +
         "import " + camelCaseName + " from './" + name + "';\n" +
         fin.slice(j)
