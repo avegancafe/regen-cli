@@ -1,13 +1,13 @@
 # regen-cli
 An opinionated React CLI
 
-##Installation
+## Installation
 
 ```bash
 npm install --global regen-cli
 ```
 
-##Usage
+## Usage
 
 There are three commands:
 
@@ -17,7 +17,7 @@ regen component <component name>
 regen reducer <reducer name>
 ```
 
-###`regen project <project name>`
+### `regen project <project name>`
 Generate a new React project with the name `<project name>`
 
 To set up your project after generating all of the source and config files,
@@ -29,7 +29,7 @@ webpack dev server.
 - Expects there to be no folder with name `<project name>`
 in the current folder.
 
-###`regen component <component name>`
+### `regen component <component name>`
 Generate a new React component with the name `<component name>`
 - Will put a React component with the name `<component name>`
 in `<project root>/src/javascripts/components/` if it can find a project root.
@@ -37,7 +37,7 @@ If not, it'll say that it cannot find a `package.json`.
 - Passing the `-f` flag to `regen component <component name>` will create a stateless
 functional component instead.
 
-###`regen reducer <reducer name>`
+### `regen reducer <reducer name>`
 Generate a new Redux reducer with the name `<reducer name>` and a new set of base
 actions with the name `<reducer name>`.
 - Will put a Redux reducer with the name `<reducer name>` in
