@@ -17,7 +17,6 @@ function generateConfig() {
   var value = ARGS[ARGS.length-1];
   var basePath = parentPackagePath();
   var inProject = false;
-
   var opts = {};
   for (var i = varsToSet.length-1; i > -1; i--) {
     opts[varsToSet[i]] = value;
@@ -36,8 +35,27 @@ function generateConfig() {
     return;
   }
 
+  if (
+    _.includes(varsToSet, "actionsPath") && /src\/javascripts\/reducers/.test(value) ||
+    _.includes(varsToSet, "reducersPath") && /src\/javascripts\/actions/.test(value)
+  ) {
+    console.log("WARNING: if actionsPath and reducersPath are the same, you must provide two arguments to regen reducer")
+    return
+  }
+
   if (fs.existsSync(path.join(basePath, ".regenrc.json"))) {
     var data = require(path.resolve(basePath + ".regenrc.json"));
+    if (
+      _.every(["reducersPath", "actionspath"], function (el) {
+        varsToSet.indexOf(el) > -1
+      }) ||
+      _.includes(varsToSet, "actionsPath") && data.reducersPath == value ||
+      _.includes(varsToSet, "reducersPath") && data.actionsPath == value
+
+    ) {
+      console.log("WARNING: if actionsPath and reducersPath are the same, you must provide two arguments to regen reducer")
+      return
+    }
     fs.writeFileSync(
       path.join(basePath, ".regenrc.json"),
       JSON.stringify(_.merge({}, data, opts))
