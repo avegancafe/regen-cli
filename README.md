@@ -15,6 +15,7 @@ There are three commands:
 regen project <project name>
 regen component <component name>
 regen reducer <reducer name>
+regen config <option name> <option value>
 ```
 
 ### `regen project <project name>`
@@ -46,3 +47,14 @@ If not, it'll say that it cannot find a `package.json`.
 - Will put a set of default action constants with the names `CREATE_<reducer name>`
 and `DELETE_<reducer name>` in
 `<project root>/src/javascripts/actions/`.
+
+### `regen config <option name> <option value>`
+Save configuration for regen in `.regenrc.json`
+
+Possible options to be set are:
+
+| Option         | Description             |
+| ---------------| ------------------------|
+| `actionPath`   | Path where all actions constants will be saved |
+| `reducerPath`  | Path where all reducers will be saved|
+
