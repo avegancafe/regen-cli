@@ -9,7 +9,7 @@ npm install --global regen-cli
 
 ## Usage
 
-There are three commands:
+There are four commands:
 
 ```bash
 regen project <project name>
