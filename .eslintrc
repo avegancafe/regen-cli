@@ -179,7 +179,7 @@
     "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
     "padded-blocks": [2, "never"], // enforce padding within blocks (off by default)
     "quotes": [2, "double"], // specify whether double or single quotes should be used
-    "semi": [2, "always"], // require or disallow use of semicolons instead of ASI
+    "semi": [2, "never"], // require or disallow use of semicolons instead of ASI
     "semi-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
     "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
