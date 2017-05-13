@@ -51,7 +51,7 @@ and `DELETE_<reducer name>` in
 ### `regen config <option name> <option value>`
 Save configuration for regen in `.regenrc.json`
 
-Possible options to be set are:
+Possible options that can be set are:
 
 | Option         | Description             |
 | ---------------| ------------------------|
