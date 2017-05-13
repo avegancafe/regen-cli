@@ -38,7 +38,7 @@ If not, it'll say that it cannot find a `package.json`.
 - Passing the `-f` flag to `regen component <component name>` will create a stateless
 functional component instead.
 
-### `regen reducer <reducer name>`
+### `regen reducer <reducer name> [<action name>]`
 Generate a new Redux reducer with the name `<reducer name>` and a new set of base
 actions with the name `<reducer name>`.
 - Will put a Redux reducer with the name `<reducer name>` in
@@ -47,6 +47,9 @@ If not, it'll say that it cannot find a `package.json`.
 - Will put a set of default action constants with the names `CREATE_<reducer name>`
 and `DELETE_<reducer name>` in
 `<project root>/src/javascripts/actions/`.
+- If you pass the optional `<action name>`, it will name the actions constants file with this name.
+This is particularly useful if you are saving your actions and reducers in the same folder.
+If you do not pass an action name, it will use the reducer name for the actions constants file.
 
 ### `regen config <option name> <option value>`
 Save configuration for regen in `.regenrc.json`
